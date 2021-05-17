@@ -1,0 +1,93 @@
+/*
+  _   ___ ____              ____
+ | | / (_) / /__ ____  ___ / / /__
+ | |/ / / / / _ `/ _ \/ -_) / / -_)
+ |___/_/_/_/\_,_/_//_/\__/_/_/\__/
+
+ @Author: SeLiNnnn
+ @Description: Normal stuff. A nice life. Cool flat. Fun job.
+ @Date: 2021-05-16 10:15
+
+*/
+
+@import "../../styles/variables";
+@import "../../styles/reboot";
+
+@import "../../styles/mixin";
+
+.btn {
+  position: relative;
+  display: inline-block;
+  font-weight: $btn-font-weight;
+  line-height: $btn-line-height;
+  color: $body-color;
+  white-space: nowrap;
+  text-align: center;
+  vertical-align: middle;
+  background-image: none;
+  border: $btn-border-width solid transparent;
+  @include button-size($btn-padding-y, $btn-padding-x, $btn-font-size, $btn-border-radius);
+  //padding: $btn-padding-x $btn-padding-y;
+  //font-size: $btn-font-size;
+  //border-radius: $border-radius;
+  box-shadow: $btn-box-shadow;
+  cursor: pointer;
+  transition: $btn-transition;
+
+  //noinspection ALL
+  &.disabled,
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: $btn-disabled-opacity;
+    box-shadow: none;
+    // 选中底下的所有子元素 不接收鼠标事件
+    > * {
+      pointer-events: none;
+    }
+  }
+
+  &-lg {
+    @include button-size($btn-padding-y-lg, $btn-padding-x-lg, $btn-font-size-lg, $btn-border-radius-lg);
+  }
+
+  &-sm {
+    @include button-size($btn-padding-y-sm, $btn-padding-x-sm, $btn-font-size-sm, $btn-border-radius-sm);
+  }
+
+  &-primary {
+    @include button-style($primary, $primary, $white)
+  }
+
+  &-danger {
+    @include button-style($danger, $danger, $white)
+  }
+
+  &-default {
+    @include button-style($white, $gray-400, $body-color, $white, $primary, $primary)
+  }
+
+  &-link {
+    font-weight: $font-weight-normal;
+    color: $btn-link-color;
+    text-decoration: $link-decoration;
+    box-shadow: none;
+
+    &:hover {
+      color: $btn-link-hover-color;
+      text-decoration: $link-hover-decoration;
+    }
+
+    &:focus,
+    &.focus {
+      text-decoration: $link-hover-decoration;
+      box-shadow: none;
+    }
+
+    //noinspection ALL
+    &:disabled,
+    &.disabled {
+      color: $btn-link-disabled-color;
+      pointer-events: none;
+    }
+  }
+}
