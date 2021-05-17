@@ -1,10 +1,18 @@
 import React from 'react';
 import Button, {ButtonSize, ButtonType} from './components/Button/button';
+import Alert from './components/Alert/alert';
+
 
 function App() {
+
+  function handleCloseAlert() {
+
+  }
+
   return (
     <div className="App">
       <header className="App-header">
+        {/*Button*/}
         <Button
           autoFocus
           onClick={(e) => {
@@ -35,6 +43,31 @@ function App() {
           disabled
         >Disabled Link</Button>
       </header>
+      <main>
+        <Alert
+          message="提示：操作成功"
+          type="success"
+          closable={true}
+          description="这里是描述内容，表示操作真的成功了"
+          onClose={handleCloseAlert}
+        />
+        <Alert
+          className="alert-custom"
+          message="失败！操作错误"
+          type="danger"
+          description="这里是描述内容，表示操作真的失败了"
+        />
+        <Alert
+          className="alert-custom"
+          message="警告⚠️"
+          type="warning"
+        />
+        <Alert
+          className="alert-custom"
+          message="默认"
+          type="default"
+        />
+      </main>
     </div>
   );
 }
