@@ -27,7 +27,7 @@ function App() {
         <Button
           btnType={ButtonType.Link}
           href="https:www.baidu.com"
-          target='_blank'
+          target="_blank"
         >Link Btn</Button>
         <Button
           btnType={ButtonType.Link}
