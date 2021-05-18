@@ -13,6 +13,13 @@
 @import "src/styles/variables";
 @import "src/styles/mixin";
 
+$alert-colors: (
+        "default": $primary,
+        "success": $success,
+        "warning": $warning,
+        "danger": $danger,
+);
+
 .alert {
   display: inline-block;
   vertical-align: top;
@@ -29,21 +36,28 @@
     font-weight: $font-weight-bold;
   }
 
-  &-default {
-    @include alert-style($primary, $light-primary)
+  //noinspection ALL
+  @each $color, $value in $alert-colors {
+    &-#{$color} {
+      @include alert-style($value, lighten($value, 20%))
+    }
   }
-
-  &-success {
-    @include alert-style($success, $light-success)
-  }
-
-  &-warning {
-    @include alert-style($warning, $light-warning)
-  }
-
-  &-danger {
-    @include alert-style($danger, $light-danger)
-  }
+  //
+  //&-default {
+  //  @include alert-style($primary, $light-primary)
+  //}
+  //
+  //&-success {
+  //  @include alert-style($success, $light-success)
+  //}
+  //
+  //&-warning {
+  //  @include alert-style($warning, $light-warning)
+  //}
+  //
+  //&-danger {
+  //  @include alert-style($danger, $light-danger)
+  //}
 
   &-visible {
     display: none;
@@ -78,5 +92,6 @@
   &-custom {
     margin-left: 2rem;
   }
+
 }
 
