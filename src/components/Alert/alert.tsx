@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {createContext, useState} from 'react';
 import classNames from 'classnames';
 
 export type AlertType = 'success' | 'default' | 'danger' | 'warning'
@@ -19,7 +19,8 @@ const Alert: React.FC<BaseAlertProps> = (props) => {
     type,
     message,
     description,
-    closable
+    closable,
+    onClose
   } = props;
 
   let [isShowAlert, setIsShowAlert] = useState(true);
@@ -30,11 +31,14 @@ const Alert: React.FC<BaseAlertProps> = (props) => {
     [`alert-visible`]: !isShowAlert
   });
 
-
-  function onClose() {
+  // 子组件向外抛出事件
+  const handleClose = () => {
     console.log('内部触发关闭');
     setIsShowAlert(false);
-  }
+    if (onClose) {
+      onClose(isShowAlert);
+    }
+  };
 
 
   return (
@@ -42,7 +46,10 @@ const Alert: React.FC<BaseAlertProps> = (props) => {
       {/*message closeable*/}
       <section className="alert-top">
         <div>{message}</div>
-        <div className={closable ? 'alert-close-show' : 'alert-close-visible'} onClick={onClose}>x</div>
+        <div className={closable ? 'alert-close-show' : 'alert-close-visible'} onClick={() => {
+          handleClose();
+        }}>x
+        </div>
       </section>
       {/*description*/}
       <section className={description ? 'alert-description-show' : 'alert-description-visible'}>

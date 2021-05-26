@@ -3,13 +3,10 @@ import Button, {ButtonSize, ButtonType} from './components/Button/button';
 import Alert from './components/Alert/alert';
 import Menu from './components/Menu/menu';
 import MenuItem from './components/Menu/menu-item';
+import SubMenu from './components/Menu/sub-menu';
 
 
 function App() {
-
-  function handleCloseAlert() {
-
-  }
 
   return (
     <div className="App">
@@ -53,7 +50,9 @@ function App() {
             type="success"
             closable={true}
             description="这里是描述内容，表示操作真的成功了"
-            onClose={handleCloseAlert}
+            onClose={(status:boolean) => {
+              console.log(status, '执行了嘛');
+            }}
           />
           <Alert
             className="alert-custom"
@@ -74,17 +73,26 @@ function App() {
         </section>
         {/* Menu*/}
         <section>
-          <Menu mode={'vertical'} defaultIndex={0}>
-            <MenuItem index={0}>Cool Link</MenuItem>
-            <MenuItem index={1} disabled>Cool Link 2</MenuItem>
-            <MenuItem index={2}>Cool Link 3</MenuItem>
+          <Menu mode={'vertical'} defaultIndex={'0'} defaultOpenMenus={['2']}>
+            <MenuItem index={'1'}>Cool Link</MenuItem>
+            <MenuItem index={'2'} disabled>Cool Link 2</MenuItem>
+            <SubMenu title="dropdown">
+              <MenuItem index={'3-0'}>dropdown 1</MenuItem>
+              <MenuItem index={'3-1'}>dropdown 2</MenuItem>
+            </SubMenu>
+            <MenuItem index={'2'}>Cool Link 3</MenuItem>
+            {/*<div>cool link 4</div>*/}
           </Menu>
-          <Menu defaultIndex={0} onSelect={(index) => {
+          <Menu onSelect={(index) => {
             alert(index);
           }}>
-            <MenuItem index={0}>Cool Link</MenuItem>
-            <MenuItem index={1} disabled>Cool Link 2</MenuItem>
-            <MenuItem index={2}>Cool Link 3</MenuItem>
+            <MenuItem>Cool Link</MenuItem>
+            <MenuItem disabled>Cool Link 2</MenuItem>
+            <SubMenu title="dropdown">
+              <MenuItem>dropdown 1</MenuItem>
+              <MenuItem>dropdown 2</MenuItem>
+            </SubMenu>
+            <MenuItem>Cool Link 3</MenuItem>
           </Menu>
         </section>
       </main>
