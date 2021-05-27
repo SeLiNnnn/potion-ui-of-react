@@ -5,9 +5,7 @@ import {Meta, Story} from '@storybook/react';
 export default {
   title: 'Button',
   component: Button,
-  argTypes: {
-    backgroundColor: {control: 'color'}
-  }
+  argTypes: { onClick: { action: 'click ' } }
 } as Meta;
 
 const Template: Story<ButtonProps> = (args) => <Button {...args}/>;
@@ -18,6 +16,11 @@ Primary.args = {
   children: 'Primary Button'
 };
 
+Primary.argTypes = {
+  'btnType': {
+    description: '按钮类型'
+  }
+};
 
 // const styles: React.CSSProperties = {
 //   textAlign: 'center'
